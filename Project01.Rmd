@@ -17,7 +17,7 @@ library(ggplot2)
 ```
 
 ```{r}
-data <- read.csv('C:/datasets/Superstore.csv')
+data <- read.csv('Superstore.csv')
 head(data)
 ```
 

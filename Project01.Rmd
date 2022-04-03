@@ -1,0 +1,63 @@
+---
+title: 'RStudio_001'
+output:
+  pdf_document: default
+  word_document: default
+  html_document:
+    fig_height: 4
+    highlight: pygments
+    theme: spacelab
+---
+
+## Loading the Libraries
+```{r}
+library(dplyr)
+library(ggplot2)
+
+```
+
+```{r}
+data <- read.csv('Superstore.csv')
+head(data)
+```
+
+
+
+```{r}
+data$Order.Date <- as.Date(data$Order.Date,"%d-%m-%y")
+data$Ship.Date <- as.Date(data$Ship.Date,"%d-%m-%y")
+
+```
+
+```{r}
+str(data)
+```
+
+```{r}
+## Data Cleaning
+drops <- c("Row.ID")
+df <- data[,!(names(data) %in% drops)]
+```
+
+```{r}
+df
+```
+
+```{r}
+## Check for missing values
+
+which(is.na(data$Country.Region))
+which(is.na(data$Country.Region))
+which(is.na(data$Country.Region))
+which(is.na(data$Country.Region))
+```
+
+
+```{r}
+s <- df %>% group_by(Region) %>% summarise_at(vars(Profit),funs(sum(.,na.rm=TRUE)))
+s
+```
+
+```{r}
+print("Hello World")
+```

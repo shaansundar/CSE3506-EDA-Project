@@ -1,0 +1,59 @@
+---
+title: "Untitled"
+output: pdf_document
+---
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+```
+
+```{r}
+data <- read.csv('C:/datasets/Superstore.csv')
+head(data)
+```
+
+
+
+```{r}
+data$Order.Date <- as.Date(data$Order.Date,"%d-%m-%y")
+data$Ship.Date <- as.Date(data$Ship.Date,"%d-%m-%y")
+
+```
+
+```{r}
+str(data)
+
+```
+```{r}
+## Data Cleaning
+drops <- c("Row.ID")
+df <- data[,!(names(data) %in% drops)]
+```
+
+```{r}
+df
+```
+
+```{r}
+## Check for missing values
+
+which(is.na(data$Country.Region))
+which(is.na(data$Country.Region))
+which(is.na(data$Country.Region))
+which(is.na(data$Country.Region))
+```
+
+
+
+```{r}
+data
+
+```
+
+
+```{r}
+
+
+```

@@ -1,8 +1,15 @@
 ---
-title: "Untitled"
-output: pdf_document
+title: 'RStudio_001'
+output:
+  pdf_document: default
+  word_document: default
+  html_document:
+    fig_height: 4
+    highlight: pygments
+    theme: spacelab
 ---
 
+## Loading the Libraries
 ```{r}
 library(dplyr)
 library(ggplot2)
@@ -24,8 +31,8 @@ data$Ship.Date <- as.Date(data$Ship.Date,"%d-%m-%y")
 
 ```{r}
 str(data)
-
 ```
+
 ```{r}
 ## Data Cleaning
 drops <- c("Row.ID")
@@ -46,14 +53,11 @@ which(is.na(data$Country.Region))
 ```
 
 
-
 ```{r}
-data
-
+s <- df %>% group_by(Region) %>% summarise_at(vars(Profit),funs(sum(.,na.rm=TRUE)))
+s
 ```
 
-
 ```{r}
-
 
 ```

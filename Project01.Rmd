@@ -1,63 +1,30 @@
----
-title: 'RStudio_001'
-output:
-  pdf_document: default
-  word_document: default
-  html_document:
-    fig_height: 4
-    highlight: pygments
-    theme: spacelab
----
-
-## Loading the Libraries
-```{r}
 library(dplyr)
 library(ggplot2)
-
-```
-
-```{r}
 data <- read.csv('Superstore.csv')
 head(data)
-```
-
-
-
-```{r}
-data$Order.Date <- as.Date(data$Order.Date,"%d-%m-%y")
-data$Ship.Date <- as.Date(data$Ship.Date,"%d-%m-%y")
-
-```
-
-```{r}
+data$Order.Date <- as.Date(data$Order.Date,"%d-%m-%Y")
+data$Ship.Date <- as.Date(data$Ship.Date,"%d-%m-%Y")
 str(data)
-```
 
-```{r}
-## Data Cleaning
 drops <- c("Row.ID")
 df <- data[,!(names(data) %in% drops)]
-```
-
-```{r}
 df
-```
-
-```{r}
-## Check for missing values
 
 which(is.na(data$Country.Region))
 which(is.na(data$Country.Region))
 which(is.na(data$Country.Region))
 which(is.na(data$Country.Region))
-```
-
-
-```{r}
 s <- df %>% group_by(Region) %>% summarise_at(vars(Profit),funs(sum(.,na.rm=TRUE)))
-s
-```
 
-```{r}
-print("Hello World")
-```
+
+newDf <- data.frame(df, year=as.numeric(format(df$Order.Date, format="%Y")))
+grouped = newDf %>% group_by(year, Region) %>% summarise_at(vars(Profit),funs(sum(.,na.rm=TRUE)))
+grouped
+ggplot(grouped, aes(x=year, y=Profit, fill=Region)) +
+  geom_bar(stat="identity")
+grouped = newDf %>% group_by(year, Segment) %>% summarise_at(vars(Profit),funs(sum(.,na.rm=TRUE)))
+ggplot(grouped, aes(x=year, y=Profit, fill=Segment)) +
+  geom_bar(stat="identity")
+grouped = newDf %>% group_by(year, Category) %>% summarise_at(vars(Profit),funs(sum(.,na.rm=TRUE)))
+ggplot(grouped, aes(x=year, y=Profit, fill=Category)) +
+  geom_bar(stat="identity")
